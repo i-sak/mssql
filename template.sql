@@ -30,12 +30,10 @@ BEGIN
 
 	-- catch
     BEGIN CATCH
-		-- XACT_STATE() = -1 이면 활성트랜잭션이 있지만 오류가 발생하여 트랜잭선을 커밋할수없음 그래서 롤백처리함
-		-- (XACT_STATE()) = -1, 0이면 활성트랜잭션이 없음 , 1이면 트랜잭션있음 -> 세션의 트랜잭션상태를 볼수 있는 함수		
+		-- XACT_STATE() => -1 : error block commit
 		BEGIN
 			IF ( XACT_STATE() ) <> 0
 				ROLLBACK TRANSACTION;
-
 		END
 	END CATCH
 
